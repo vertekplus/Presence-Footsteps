@@ -24,7 +24,10 @@ outlet.mcVersionRange = project.minecraft_version_range
 
 group = project.group
 description = project.displayname
-archivesBaseName = project.name
+tasks.withType(Jar) {
+    archiveBaseName.set('PresenceFootsteps')
+}
+
 
 loom {
     mixin.defaultRefmapName = 'presencefootsteps.mixin.refmap.json'
@@ -100,7 +103,7 @@ modrinth {
     projectId = project.modrinth_project_id
     //featured = true
     versionNumber = version.toString()
-    versionName = archivesBaseName + '-' + version
+    versionName = project.name + '-' + version
     changelog = "[Changelog](https://github.com/Sollace/Presence-Footsteps/releases/tag/${version.toString()})"
     loaders = ['fabric', 'quilt']
     uploadFile = remapJar
